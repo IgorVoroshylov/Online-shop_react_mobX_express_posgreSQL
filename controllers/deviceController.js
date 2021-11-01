@@ -39,16 +39,16 @@ class DeviceController {
          devices = await Device.findAndCountAll({limit, offset}); // toе можно чтоб небыло общего колличества страниц findAll
       }
       if(brandId && !typeId) {
-         devices = await Device.findAndCountAll({where: {brandId}, limit, offset});
+         devices = await Device.findAndCountAll({where: {brandId}, limit});
       }
       if(!brandId && typeId) {
-         devices = await Device.findAndCountAll({where: {typeId}, limit, offset});
+         devices = await Device.findAndCountAll({where: {typeId}, limit});
       }
       if(brandId && typeId) {
-         devices = await Device.findAndCountAll({where: {typeId, brandId}, limit, offset});
+         devices = await Device.findAndCountAll({where: {typeId, brandId}, limit});
       }
       return res.json(devices);
-   }
+   };
    async getOne(req, res) {
       const {id} = req.params;
       const device = await Device.findOne(

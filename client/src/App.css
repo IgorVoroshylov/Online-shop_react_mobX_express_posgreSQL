@@ -178,6 +178,9 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 	overflow: hidden;
 	flex: 1 1 auto;
 }
+.filter_list:first-child {
+	margin-top: 20px;
+}
 
 .filter_list_title {
 	text-align: center;
@@ -280,7 +283,7 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 	padding: 0px 20px;
 }
 
-/* .device_list { for example
+/* .device_list { flex
 	display: flex;
 	flex-wrap: wrap;
 	margin: 0 -10px;
@@ -289,7 +292,13 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 .device_list {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, 25%);
+	/* grid-template-columns: repeat(auto-fit, 237.5px); */
 	margin: 0 -10px;
+}
+@media (max-width: 991px) {
+	.device_list {
+		grid-template-columns: repeat(auto-fit, 33.333%);
+	}
 }
 
 .device_item_wrapper {
@@ -299,7 +308,7 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 	/* width: 25%; for flex */
 }
 
-.device_item {
+/* .device_item { for flex
 	height: 250px;
 	padding: 5px 5px 5px 5px;
 	cursor: pointer;
@@ -307,10 +316,21 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 	border-radius: 5px;
 	overflow: hidden;
 	text-align: center;
+} */
+
+.device_item {
+	display: grid;
+	grid-template: 80% auto / 1fr;
+	height: 250px;
+	border: 1px solid rgb(211, 211, 211);
+	border-radius: 5px;
+	padding: 5px 5px 0px 5px;
+	overflow: hidden;
+	cursor: pointer;
 }
 
 .device_item_image_conteiner {
-	height: 88%;
+	/* height: 88%; for flex */
 	overflow: hidden;
 }
 .device_item_image_conteiner img {
