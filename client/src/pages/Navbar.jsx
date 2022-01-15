@@ -8,19 +8,19 @@ import { fetchBasketDevices } from "../http/deviceAPI";
 import { reduceArray } from "../utils/reduceArray";
 
 
-const NavBar = observer( () => { // что б компонента перерендерилась в режиме реального времени, поместили в observer, mobx отслеживает изменения
+const NavBar = observer( () => {
    const {user} = useContext(Context);
    const history = useHistory();
    const isAdmin = user.user.role === "ADMIN";
-   const userId = user.user.id; // для того чтоб отреагировал useEffect и получить колличество товаров в корзине при входе
+   const userId = user.user.id;
 
    useEffect(() => {
       const getBasketDevices = async() => {
          try {
-            const basketId = user.user.id; // присвоили имя для наглядности, можно было закинуть "userId"
+            const basketId = user.user.id; // присвоили basketId для наглядности что id корзины совпадает с userId пользователя
             const data = await fetchBasketDevices(basketId);
             const basketListId = reduceArray(data.rows);
-            user.setBasketList(basketListId);
+            user.setBasketListId(basketListId);
          } catch (err) {
             console.log(err.message);
          }
@@ -47,7 +47,7 @@ const NavBar = observer( () => { // что б компонента перере�
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                      </svg>
                   </NavLink>
-                  {user.basketList.length > 0 && <div className='amountItems'>{user.basketList.length}</div>}
+                  {user.basketListId.length > 0 && <div className='amountItems'>{user.basketListId.length}</div>}
                </div>
                <div className="user_name">{user.user.email}</div>
                <div>

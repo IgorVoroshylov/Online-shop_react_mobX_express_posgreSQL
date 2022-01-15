@@ -4,10 +4,11 @@ export default class UserStore {
    constructor() {
       this._isAuth = false
       this._user = {}
-      this._basketList = []
+      this._basketListId = [] // массив с id товаров, которые находяться в корзине
       this._error = ''
       makeAutoObservable(this)
    }
+
    setIsAuth(bool) {
       this._isAuth = bool
    }
@@ -17,8 +18,8 @@ export default class UserStore {
    setError(message) {
       this._error = message
    }
-   setBasketList(list) {
-      this._basketList = list
+   setBasketListId(list) {
+      this._basketListId = list
    }
 
    get isAuth() {
@@ -30,7 +31,7 @@ export default class UserStore {
    get error() {
       return  this._error
    }
-   get basketList() {
-      return  this._basketList
+   get basketListId() {
+      return  this._basketListId
    }
-}
+};

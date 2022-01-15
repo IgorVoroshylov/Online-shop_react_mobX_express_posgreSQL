@@ -5,7 +5,7 @@ import jwt_decode from 'jwt-decode';
 export const registration = async(email, password) => {
    const response = await host.post('api/user/registration', {email, password, role: 'USER'});
    const {data} = response;
-   localStorage.setItem('token', data.token); // достаеться из localStorage в axios.js, чтоб подставлять автоматически токэн определенным запросам для которых нужна регистрация
+   localStorage.setItem('token', data.token); // достается из localStorage в axios.js, чтоб подставлять автоматически токэн определенным запросам для которых нужна регистрация
    return jwt_decode(data.token);
 };
 

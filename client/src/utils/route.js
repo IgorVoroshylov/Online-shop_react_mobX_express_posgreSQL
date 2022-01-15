@@ -14,7 +14,7 @@ export const privateRoutes = [
       path: BASKET_ROUTE,
       component: Basket
    }
-]
+];
 
 export const publicRoutes = [
    {
@@ -33,4 +33,4 @@ export const publicRoutes = [
       path: DEVICE_ROUTE + '/:id',
       component: DevicePage
    },
-]
+];

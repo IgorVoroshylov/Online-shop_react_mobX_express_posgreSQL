@@ -5,7 +5,7 @@ module.exports = function (req, res, next) {
       next();
    }
    try {
-      const token = req.headers.authorization.split(' ')[1]; //изыймаем из headers токен(поскальку в headers помещаеться сначала тип токена(bearer) а потом сам токен(4mdmj3j...), разделяем по пробелу)
+      const token = req.headers.authorization.split(' ')[1]; // изыймаем из headers токен(поскольку в headers помещаеться сначала тип токена(bearer) а потом сам токен(4mdmj3j...), разделяем по пробелу)
       if(!token) {
          return res.status(401).json({message: 'не авторизован'});
       }
@@ -15,6 +15,6 @@ module.exports = function (req, res, next) {
    } catch(err) {
       res.status(401).json({message: 'не авторизован!'});
    }
-}
+};
 
-//потом подключаем в userRouter
+// потом подключаем в userRouter

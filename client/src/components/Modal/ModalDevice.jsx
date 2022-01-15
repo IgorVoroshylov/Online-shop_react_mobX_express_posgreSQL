@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { useContext, useEffect, useState } from "react";
-import { createDevice, fetchBrand, fetchDevice, fetchTypes } from "../../http/deviceAPI";
+import { createDevice, fetchBrand, fetchTypes } from "../../http/deviceAPI";
 import { Context } from "../../index";
 import MySelect from "../Select/MySelect";
 
@@ -19,8 +19,6 @@ const ModalDevice = observer(({ visible, setVisible}) => {
       .then(data => device.setTypes(data));
       fetchBrand()
       .then(data => device.setBrands(data));
-      fetchDevice()
-      .then(data => device.setDevice(data.rows))
    }, [device]);
 
    const submitForm = (e) => {
@@ -33,7 +31,6 @@ const ModalDevice = observer(({ visible, setVisible}) => {
       fornData.append('brandId', deviceBrand);
       fornData.append('typeId', deviceType);
       fornData.append('info', JSON.stringify(info));
-
 
       createDevice(fornData)
       .then(data => {
@@ -70,13 +67,17 @@ const ModalDevice = observer(({ visible, setVisible}) => {
       setInfo(info.filter(i => i.number !== number))
    };
 
+   const closeModalWindow = (e) => {
+      e.preventDefault();
+      setVisible(false)
+   };
+
    return(
-      <div className={visible ? `${"myModal"} ${"active"}` : "myModal"} onClick={()=> setVisible(false)}>
+      <div className={visible ? `${"myModal"} ${"active"}` : "myModal"} onClick={closeModalWindow}>
          <div className="myModalContent" onClick={(e)=> e.stopPropagation()}>
             <div>
                <div className="modal_inner_title">Additing Device</div>
                <form className="form">
-                  {/* <input type="text" placeholder="add device..."/> */}
                   <MySelect
                            value={deviceType}
                            change={value => setDeviceType(value)}
@@ -112,18 +113,18 @@ const ModalDevice = observer(({ visible, setVisible}) => {
                            <input
                                  type="text"
                                  placeholder="name info..."
-                                 value={info.title}
+                                 value={inform.title}
                                  onChange={(e) => changeInfo('title', e.target.value, inform.number)}/>
                            <input
                                  type="text"
                                  placeholder="value info..."
-                                 value={info.description}
+                                 value={inform.description}
                                  onChange={(e) => changeInfo('description', e.target.value, inform.number)}/>
                            <button
                                  onClick={e => deleteInfo(e, inform.number)}
                                  className="del_specifications_button">delete</button>
                         </div>
-                        )
+                     )
                   }
                   <div className="modal_button_block">
                      <button
@@ -131,7 +132,7 @@ const ModalDevice = observer(({ visible, setVisible}) => {
                            onClick={submitForm}>Add</button>
                      <button
                            className="form_button_close"
-                           onClick={()=> setVisible(false)}>Close</button>
+                           onClick={closeModalWindow}>Close</button>
                   </div>
                </form>
             </div>

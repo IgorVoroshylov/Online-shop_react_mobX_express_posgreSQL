@@ -5,6 +5,7 @@ import { Context } from '.'
 import AppRouter from './components/AppRouter'
 import NavBar from './pages/Navbar'
 import { check } from './http/userAPI'
+import 'materialize-css'
 
 const App = observer( () => {
   const {user} = useContext(Context);

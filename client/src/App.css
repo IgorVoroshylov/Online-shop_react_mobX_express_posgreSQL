@@ -12,7 +12,6 @@
 a:focus,a:active{outline: none;}
 nav,footer,header,aside{display: block;}
 html,body{
-	height: 100%;
 	width: 100%;
 	font-size: 100%;
 	line-height: 1;
@@ -30,6 +29,12 @@ a:hover{text-decoration: none;}
 ul li{list-style: none;}
 img{vertical-align: top;}
 h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
+
+@import '~materialize-css/dist/css/materialize.min.css';
+
+body.active {
+	overflow: hidden; /* для блокировки скрола вьюпорт, при активации модального окна зоформления заказа */
+}
 
 /*! navbar */
 .NavBar {
@@ -66,7 +71,7 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 	text-align: center;
 	font-size: 10px;
 	border-radius: 50%;
-	padding-right: 1px;
+	/* padding-right: 1px; */
 	top: -8px;
 	right: -8px;
 	color: red;
@@ -253,7 +258,7 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 .active_item {
 	background-color: rgb(112, 194, 248);
 	color: #000;
-	
+
 }
 
 .filter_list_item:hover {
@@ -532,7 +537,7 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
    border-radius: 5px;
 	max-width: 500px;
 	width: 100%;
-	position: relative;
+	position: relative; /* ! position: relative => ? */
 }
 
 .modal_inner_title {
@@ -713,5 +718,33 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 
 .sum {
 	margin-top: 15px;
+	text-align: center;
+}
+
+/*! OrderModalPage */
+.order {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+   background-color: rgba(0, 0, 0, 0.5);
+	overflow: auto;
+	display: none;
+}
+
+
+body.active .order {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.order_content {
+	padding: 25px;
+   background: white;
+   border-radius: 5px;
+	max-width: 500px;
+	width: 100%;
 	text-align: center;
 }

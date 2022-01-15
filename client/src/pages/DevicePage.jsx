@@ -4,7 +4,7 @@ import { Context } from "../index";
 import { fetchOneDevice, addToBasket, fetchBasketDevices } from "../http/deviceAPI";
 import { observer } from "mobx-react-lite";
 import { reduceArray } from "../utils/reduceArray";
-import BascketButtons from "../components/AddToBascketButtons";
+import BascketButtons from "../components/BascketButtons";
 import { LOGIN_ROUTE } from "../utils/consts";
 
 const DevicePage = observer(() => {
@@ -12,18 +12,21 @@ const DevicePage = observer(() => {
    const [device, setDevice] = useState({info: []});
    const [loading, setLoading] = useState(true);
    const {id} = useParams();
-   const activeButton = user.basketList.includes(+id);
+   const activeButton = user.basketListId.includes(+id);
 
    const addDeviceToBasket = async() => {
       try {
-         await addToBasket(+id, user.user.id, device.name, device.img, device.price); // добавили товар в db
-         const data = await fetchBasketDevices(user.user.id); // сразу же получаем все id товаров в корзине, и переобразуем в более удобный массив
+         await addToBasket(+id, user.user.id, device.name, device.img, device.price); // добавили данные о товаре в db (BasketDevice)
+
+         const data = await fetchBasketDevices(user.user.id); // сразу же получаем все товары в корзине
+
          const basketListId = reduceArray(data.rows); // получаем массив только id товаров в корзине
-         user.setBasketList(basketListId); // сохраняем массив id товаров в корзине в state
+
+         user.setBasketListId(basketListId); // сохраняем массив id товаров в корзине в state
       } catch (err) {
          console.log(err.message);
       }
-   }
+   };
 
    useEffect(() => {
       const getOneDevice = async() => {

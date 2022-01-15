@@ -5,7 +5,7 @@ import { Context } from "..";
 
 const BrendBar = observer(() => {
    const {device} = useContext(Context);
-   const [active, setActive] = useState(false)
+   const [active, setActive] = useState(false);
 
    return(
       <div className={active ? 'filter_list activeMarker' : 'filter_list'}>

@@ -12,8 +12,13 @@ const ModalType = ({ visible, setVisible}) => {
       })
    };
 
+   const closeModalWindow = (e) => {
+      e.preventDefault();
+      setVisible(false)
+   };
+
    return(
-      <div className={visible ? `${"myModal"} ${"active"}` : "myModal"} onClick={()=> setVisible(false)}>
+      <div className={visible ? `${"myModal"} ${"active"}` : "myModal"} onClick={closeModalWindow}>
          <div className="myModalContent" onClick={(e)=> e.stopPropagation()}>
             <div>
                <div className="modal_inner_title">Additing Type</div>
@@ -29,7 +34,7 @@ const ModalType = ({ visible, setVisible}) => {
                            onClick={addType}>Add</button>
                      <button
                            className="form_button_close"
-                           onClick={()=> setVisible(false)}>Close</button>
+                           onClick={closeModalWindow}>Close</button>
                   </div>
                </form>
             </div>

@@ -4,7 +4,7 @@ import { Context } from "..";
 
 const TypeBar = observer(() => {
    const {device} = useContext(Context);
-   const [active, setActive] = useState(false)
+   const [active, setActive] = useState(false);
 
    return(
          <div className={active ? 'filter_list activeMarker' : 'filter_list'}>
@@ -25,7 +25,8 @@ const TypeBar = observer(() => {
                               ? "filter_list_item active_item"
                               : "filter_list_item"
                         }
-                        onClick={() => device.setSelectedType(type)}>{type.name}</div>
+                        onClick={() => device.setSelectedType(type)}
+                     >{type.name}</div>
                   )
                }
             </div>

@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
 import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import OrderModalWindow from "../components/Modal/OrderModalWindow";
 import { deleteBasketDevicesItem, fetchBasketDevices } from "../http/deviceAPI";
 import { Context } from "../index";
 import { DEVICE_ROUTE } from "../utils/consts";
@@ -12,6 +13,11 @@ const Basket = observer( () => {
    const [basketDevices, setBasketDevices] = useState([]);
    const [loading, setLoading] = useState(true);
    let sum = 0;
+
+   const toggleOrder = e => {
+      const mainElement = e.target.closest('body');
+      mainElement.classList.toggle('active');
+   };
 
    useEffect(() => {
       const getBasketDevice = async() => {
@@ -35,9 +41,9 @@ const Basket = observer( () => {
       await deleteBasketDevicesItem(id);
       const data = await fetchBasketDevices(basketId);
       const basketListId = reduceArray(data.rows);
-      user.setBasketList(basketListId);
+      user.setBasketListId(basketListId);
       setBasketDevices(data.rows);
-   }
+   };
 
    if(loading) return <div>Loading...</div>
 
@@ -69,11 +75,14 @@ const Basket = observer( () => {
             basketDevices.length > 0
             ?
             <div className='basket_container_checkout'>
-               <div className='sum'><span>Итого: {sum} грн</span><button>Оформить заказ</button></div>
+               <div className='sum'><span>Итого: {sum} грн</span>
+                  <button onClick={toggleOrder}>Оформить заказ</button>
+               </div>
             </div>
             :
             <div className='sum'>Корзина пуста</div>
          }
+         <OrderModalWindow toggleOrder={toggleOrder}/>
       </div>
    )
 });

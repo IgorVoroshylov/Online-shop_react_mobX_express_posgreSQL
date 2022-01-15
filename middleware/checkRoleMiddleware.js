@@ -1,4 +1,4 @@
-//создали checkRoleMiddleware для того что б добавлять товар мог только пользователь с role ADMIN, и вызываем в TypeRouter
+// создали checkRoleMiddleware для того, что б добавлять товар мог только пользователь с role ADMIN, и вызываем в TypeRouter
 const jwt = require('jsonwebtoken');
 
 module.exports = function(role) {
@@ -7,7 +7,7 @@ module.exports = function(role) {
          next();
       }
       try {
-         const token = req.headers.authorization.split(' ')[1]; //изыймаем из headers токен(поскальку в headers помещаеться сначала тип токена а потом сам токен, разделяем по пробелу)
+         const token = req.headers.authorization.split(' ')[1]; // изыймаем из headers токен(поскольку в headers помещаеться сначала тип токена а потом сам токен, разделяем по пробелу)
          if(!token) {
             return res.status(401).json({message: 'не авторизован'});
          }
@@ -23,5 +23,5 @@ module.exports = function(role) {
    }
 };
 
-//применим в typeRouter
-//этот middleware можно добавить на создание девайсов и брендов!
+// применим в typeRouter
+// этот middleware можно добавить на создание девайсов и брендов!

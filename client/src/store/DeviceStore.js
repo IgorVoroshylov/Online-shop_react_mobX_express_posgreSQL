@@ -23,9 +23,11 @@ export default class DeviceStore {
       this._device = device
    }
    setSelectedType(stype) {
+      this._page = 1
       this._selectedType = stype
    }
    setSelectedBrand(sbrand) {
+      this._page = 1
       this._selectedBrand = sbrand
    }
    setPage(page) {
@@ -62,4 +64,4 @@ export default class DeviceStore {
    get limit() {
       return this._limit
    }
-}
+};

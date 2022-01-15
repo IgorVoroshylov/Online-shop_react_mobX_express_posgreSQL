@@ -7,6 +7,7 @@ const Admin = () => {
    const [visibleType, setVisibleType] = useState(false);
    const [visibleBrand, setVisibleBrand] = useState(false);
    const [visibleDevice, setVisibleDevice] = useState(false);
+
    return(
       <div className="admin">
          <div className="admin_button_wrapper">
